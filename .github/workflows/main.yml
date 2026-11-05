@@ -15,4 +15,22 @@ jobs:
       # Step 1: Get a copy of the repo onto the runner
       - name: Get the repository code
         uses: actions/checkout@v4
+
+              # Step 2: Add a dated note to the web page for whoever pushed
+      - name: Show who triggered the workflow
+        run: echo "Workflow triggered by ${{ github.actor }}"
+
+      - name: Log Lead Investigator update
+        if: github.actor == 'LioneOG'
+        run: |
+          sed -i '/<\/body>/i <p>Case file updated by Lead Investigator on '"$(TZ=Australia/Sydney date)"'</p>' index.html
+          cat index.html
+
+      - name: Log Member 1 update
+        if: github.actor == 'member1-username'
+        run: sed -i '/<\/body>/i <p>Case file updated by Member 1 on '"$(TZ=Australia/Sydney date)"'</p>' index.html
+
+      - name: Log Member 2 update
+        if: github.actor == 'member2-username'
+        run: sed -i '/<\/body>/i <p>Case file updated by Member 2 on '"$(TZ=Australia/Sydney date)"'</p>' index.html
         
