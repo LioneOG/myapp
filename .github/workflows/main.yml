@@ -40,4 +40,13 @@ jobs:
           echo "" >> README.md
           echo "### Case log: ${{ github.actor }} updated the site on $(TZ=Australia/Sydney date '+%d/%m/%Y %H:%M') [Commit: $(git rev-parse --short HEAD)]" >> README.md
           tail -n 3 README.md
+
+                # Step 4: Commit the updated files back to main
+      - name: Save updates to the repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html README.md
+          git commit -m "Auto-update: case log entry for ${{ github.actor }}" || echo "Nothing new to save"
+          git push origin main
         
