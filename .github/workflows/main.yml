@@ -33,4 +33,11 @@ jobs:
       - name: Log Member 2 update
         if: github.actor == 'member2-username'
         run: sed -i '/<\/body>/i <p>Case file updated by Member 2 on '"$(TZ=Australia/Sydney date)"'</p>' index.html
+
+              # Step 3: Record the update in the README
+      - name: Add entry to README case log
+        run: |
+          echo "" >> README.md
+          echo "### Case log: ${{ github.actor }} updated the site on $(TZ=Australia/Sydney date '+%d/%m/%Y %H:%M') [Commit: $(git rev-parse --short HEAD)]" >> README.md
+          tail -n 3 README.md
         
