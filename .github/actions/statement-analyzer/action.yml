@@ -1,0 +1,23 @@
+name: 'Witness Statement Analyzer'
+description: 'Builds the analyzer container and profiles the vowels in a witness statement.'
+
+inputs:
+  file:
+    description: 'The statement file to analyse (e.g. witness_statement.txt).'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Build the analyzer image
+      shell: bash
+      run: docker build -t statement-analyzer:latest "${{ github.workspace }}"
+
+    - name: Run the analyzer container
+      shell: bash
+      run: |
+        docker run --rm \
+          -v "${{ github.workspace }}":/app \
+          -e INVESTIGATOR="${{ github.actor }}" \
+          -e CASE_FILE="${{ inputs.file }}" \
+          statement-analyzer:latest
