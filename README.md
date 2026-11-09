@@ -9,3 +9,8 @@ My Demo App
 - Analysed for: LioneOG
 - Vowel count: a=11 e=11 i=5 o=9 u=1 (total 37)
 - Logged: 09/11/2026 14:21 AEDT
+
+### Statement analysis: witness_statement.txt
+- Analysed for: LioneOG
+- Vowel count: a=11 e=11 i=5 o=9 u=1 (total 37)
+- Logged: 09/11/2026 14:27 AEDT
